@@ -1,0 +1,474 @@
+/* =====================================================
+   LAB3 - main.css
+   External stylesheet for index.html, login.html, signup.html
+   Yonsei Internet Programming, Spring 2026
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Manrope:wght@300;400;500;600;700&display=swap');
+
+/* ---------- Reset & Base ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #141414;
+  --surface: #1e1e1e;
+  --surface-hi: #2a2a2a;
+  --border: #3a3a3a;
+  --text: #f0e6d6;
+  --text-muted: #a89d8b;
+  --accent: #c44539;
+  --accent-soft: #d4a574;
+}
+
+html, body {
+  /* prevent horizontal scrollbar from animation start (header text off-screen) */
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Manrope', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ---------- 1020px container ---------- */
+.page-container {
+  width: 100%;
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* =====================================================
+   HEADER (title + navigation)
+   ===================================================== */
+.site-header {
+  padding: 32px 0 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* --- Header title sliding animation (right -> left, 2s) --- */
+/* Technique: a flex spacer's width shrinks from 100% -> 0,
+   pushing the title from the right edge of the bar to the left.
+   Pure HTML/CSS, no JS. */
+.title-bar {
+  display: flex;
+  width: 100%;
+  overflow: hidden;          /* keep title clipped within 1020px */
+  margin-bottom: 20px;
+}
+
+.title-spacer {
+  flex-shrink: 0;
+  animation-name: slideHeader;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slideHeader {
+  from { width: 100%; }
+  to   { width: 0; }
+}
+
+.header-title {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-family: 'Playfair Display', 'Nanum Myeongjo', serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--text);
+}
+
+.header-title .accent {
+  color: var(--accent);
+}
+
+/* --- Navigation: flex container (uses 4 flex props) --- */
+.navigation {
+  display: flex;
+  flex-direction: row;        /* (1) */
+  flex-wrap: nowrap;          /* (2) */
+  justify-content: flex-start;/* (3) */
+  align-items: center;
+  gap: 24px;
+  padding: 8px 0;
+}
+
+.nav-link {
+  flex-grow: 0;               /* (4) */
+  flex-shrink: 0;
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  padding: 4px 2px;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--accent-soft);
+}
+
+.nav-link-active {
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
+
+/* =====================================================
+   MAIN CONTENT (nested flex containers, 4+ levels)
+   Hierarchy used in index.html:
+   main(col)
+     └ movies-section(col)
+         └ movie-cards(row)
+             └ movie-card(col)
+                 └ movie-images(row)
+     └ about-section(col)
+         └ about-content(row)
+   ===================================================== */
+.main-content {
+  display: flex;              /* L1 */
+  flex-direction: column;
+  gap: 48px;
+  padding: 32px 0 64px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.5px;
+}
+
+/* --- Movies section --- */
+.movies-section {
+  display: flex;              /* L2 */
+  flex-direction: column;
+}
+
+.movie-cards {
+  display: flex;              /* L3 */
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.movie-card {
+  display: flex;              /* L4 */
+  flex-direction: column;
+  flex: 1 1 0;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.movie-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.movie-images {
+  display: flex;              /* L5 */
+  flex-direction: row;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* --- Image hover effects (zoom + label overlay) --- */
+.image-frame {
+  position: relative;
+  flex: 1 1 auto;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--surface-hi);
+  aspect-ratio: 2 / 3;
+}
+
+.movie-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Hover zoom: 2 second transition (Requirement #4) */
+  transition: transform 2s ease;
+}
+
+.image-frame:hover .movie-image {
+  transform: scale(1.18);
+}
+
+/* Hover label: shows movie name on top of the image (Requirement #5) */
+.image-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 20, 20, 0.82);
+  color: var(--text);
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  padding: 12px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  letter-spacing: 0.3px;
+}
+
+.image-frame:hover .image-label {
+  opacity: 1;
+}
+
+.movie-meta {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+  margin-top: auto;
+}
+
+/* --- About section --- */
+.about-section {
+  display: flex;              /* L (extra) */
+  flex-direction: column;
+}
+
+.about-content {
+  display: flex;              /* L (extra) */
+  flex-direction: row;
+  gap: 32px;
+}
+
+.about-content p {
+  flex: 1 1 0;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+/* =====================================================
+   AUTH PAGES (login.html, signup.html)
+   ===================================================== */
+.auth-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 48px 0 64px;
+}
+
+.auth-section {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.form-input,
+.form-select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 11px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  border-radius: 2px;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.form-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.btn-primary,
+.btn-secondary {
+  flex: 1 1 0;
+  padding: 11px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  border: 1px solid var(--accent);
+  letter-spacing: 0.3px;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #a8362c;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--accent);
+}
+
+.btn-secondary:hover {
+  background: rgba(196, 69, 57, 0.12);
+}
+
+.auth-aside {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.auth-aside a {
+  color: var(--accent-soft);
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.auth-aside a:hover {
+  text-decoration: underline;
+}
+
+/* =====================================================
+   MEDIA QUERIES (3 cases as required by spec)
+   Case 1: 801px and up   -> default styles above
+   Case 2: 481px ~ 800px  -> tablet
+   Case 3: up to 480px    -> mobile
+   ===================================================== */
+
+/* --- Case 2: Tablet (481px ~ 800px) --- */
+@media (min-width: 481px) and (max-width: 800px) {
+  .header-title {
+    font-size: 24px;
+  }
+
+  /* Movies: 2 per row, third card stays at half-width (no grow) */
+  .movie-card {
+    flex: 0 1 calc(50% - 10px);
+    min-width: 240px;
+    max-width: calc(50% - 10px);
+  }
+
+  /* About: stack vertically */
+  .about-content {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+/* --- Case 3: Mobile (max-width 480px) --- */
+@media (max-width: 480px) {
+  .site-header {
+    padding: 20px 0 12px;
+  }
+
+  .header-title {
+    font-size: 20px;
+  }
+
+  /* Navigation stacks vertically and centers */
+  .navigation {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-link {
+    flex-grow: 1;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-link-active {
+    border-bottom: 2px solid var(--accent);
+  }
+
+  /* Main content tightens up */
+  .main-content {
+    gap: 32px;
+    padding: 20px 0 48px;
+  }
+
+  /* Movie cards: single column */
+  .movie-cards {
+    flex-direction: column;
+  }
+
+  .movie-card {
+    flex: 1 1 100%;
+  }
+
+  /* About: single column */
+  .about-content {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* Auth form padding */
+  .auth-form {
+    padding: 24px 18px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+}

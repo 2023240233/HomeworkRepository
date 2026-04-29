@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김성민's Cinema | 영화 컬렉션</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="page-container">
+
+        <!-- ===== HEADER (animated title + nav linking) ===== -->
+        <header class="site-header">
+
+            <!-- Header text slides from RIGHT -> LEFT over 2 seconds -->
+            <div class="title-bar">
+                <div class="title-spacer"></div>
+                <h1 class="header-title">김성민의 <span class="accent">시네마</span> 컬렉션입니다.</h1>
+            </div>
+
+            <!-- Navigation: flex-container with 4 flex properties -->
+            <nav class="navigation">
+                <a href="index.html" class="nav-link nav-link-active">메인페이지</a>
+                <a href="login.html" class="nav-link">로그인</a>
+                <a href="signup.html" class="nav-link">회원가입</a>
+            </nav>
+        </header>
+
+        <!-- ===== MAIN CONTENT (4+ nested flex containers) ===== -->
+        <main class="main-content">
+
+            <!-- Movies section -->
+            <section class="movies-section">
+                <h2 class="section-title">Movies</h2>
+
+                <div class="movie-cards">
+
+                    <!-- Movie 1 -->
+                    <article class="movie-card">
+                        <h3 class="movie-title">Eye for an Eye</h3>
+                        <div class="movie-images">
+                            <div class="image-frame">
+                                <img src="images/eye-for-an-eye.jpg"
+                                     alt="Eye for an Eye (1996) movie poster"
+                                     class="movie-image">
+                                <span class="image-label">Eye for an Eye</span>
+                            </div>
+                        </div>
+                        <p class="movie-meta">1996 · Drama / Thriller</p>
+                    </article>
+
+                    <!-- Movie 2 -->
+                    <article class="movie-card">
+                        <h3 class="movie-title">Death and the Maiden</h3>
+                        <div class="movie-images">
+                            <div class="image-frame">
+                                <img src="images/death-and-the-maiden.jpg"
+                                     alt="Death and the Maiden (1994) movie poster"
+                                     class="movie-image">
+                                <span class="image-label">Death and the Maiden</span>
+                            </div>
+                        </div>
+                        <p class="movie-meta">1994 · Drama / Mystery</p>
+                    </article>
+
+                    <!-- Movie 3 -->
+                    <article class="movie-card">
+                        <h3 class="movie-title">Interview with the Vampire</h3>
+                        <div class="movie-images">
+                            <div class="image-frame">
+                                <img src="images/interview-with-the-vampire.jpg"
+                                     alt="Interview with the Vampire (1994) movie poster"
+                                     class="movie-image">
+                                <span class="image-label">Interview with the Vampire</span>
+                            </div>
+                        </div>
+                        <p class="movie-meta">1994 · Drama / Horror</p>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- About section -->
+            <section class="about-section">
+                <h2 class="section-title">About</h2>
+                <div class="about-content">
+                    <p>여기는 제가 좋아하는 영화 세 편을 소개하는 작은 컬렉션입니다. 어두운 복수극부터 진실을 마주하는 심리극, 그리고 영원을 살아가는 흡혈귀의 고백까지 — 다시 보고 싶어지는 작품들만 모았어요. 각 카드의 포스터에 마우스를 올리면 부드럽게 확대되며 제목이 떠오릅니다.</p>
+                    <p>This site introduces three films I keep returning to. It is a static page built for the Internet Programming course at Yonsei University, using only HTML and external CSS — no frameworks, no JavaScript. Every animation, every hover state, every responsive breakpoint here is pure stylesheet.</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</body>
+</html>

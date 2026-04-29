@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 | 김성민's Cinema</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="page-container">
+
+        <!-- ===== HEADER ===== -->
+        <header class="site-header">
+            <div class="title-bar">
+                <div class="title-spacer"></div>
+                <h1 class="header-title">회원가입 <span class="accent">페이지</span>입니다.</h1>
+            </div>
+
+            <nav class="navigation">
+                <a href="index.html" class="nav-link">메인페이지</a>
+                <a href="login.html" class="nav-link">로그인</a>
+                <a href="signup.html" class="nav-link nav-link-active">회원가입</a>
+            </nav>
+        </header>
+
+        <!-- ===== MAIN: signup form ===== -->
+        <main class="main-content auth-main">
+            <section class="auth-section">
+                <h2 class="section-title">Sign Up</h2>
+
+                <form class="auth-form" action="#" method="post">
+                    <div class="form-row">
+                        <label class="form-label" for="signup-id">아이디</label>
+                        <input type="text"
+                               id="signup-id"
+                               name="username"
+                               class="form-input"
+                               placeholder="4자 이상의 영문/숫자"
+                               required>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-label" for="signup-pw">비밀번호</label>
+                        <input type="password"
+                               id="signup-pw"
+                               name="password"
+                               class="form-input"
+                               placeholder="8자 이상"
+                               required>
+                        <span class="form-hint">영문, 숫자, 특수문자를 조합해주세요.</span>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-label" for="signup-pw-confirm">비밀번호 확인</label>
+                        <input type="password"
+                               id="signup-pw-confirm"
+                               name="password_confirm"
+                               class="form-input"
+                               placeholder="비밀번호를 다시 입력하세요"
+                               required>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-label" for="signup-name">이름</label>
+                        <input type="text"
+                               id="signup-name"
+                               name="name"
+                               class="form-input"
+                               placeholder="이름을 입력하세요"
+                               required>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-label" for="signup-email">이메일</label>
+                        <input type="email"
+                               id="signup-email"
+                               name="email"
+                               class="form-input"
+                               placeholder="example@yonsei.ac.kr"
+                               required>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-label" for="signup-genre">선호 장르</label>
+                        <select id="signup-genre" name="genre" class="form-select">
+                            <option value="">장르를 선택하세요</option>
+                            <option value="drama">드라마</option>
+                            <option value="thriller">스릴러</option>
+                            <option value="horror">호러</option>
+                            <option value="romance">로맨스</option>
+                            <option value="action">액션</option>
+                            <option value="scifi">SF</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">가입하기</button>
+                        <a href="login.html" class="btn-secondary">로그인</a>
+                    </div>
+                </form>
+
+                <p class="auth-aside">
+                    이미 계정이 있으신가요?
+                    <a href="login.html">로그인 하러가기</a>
+                </p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
