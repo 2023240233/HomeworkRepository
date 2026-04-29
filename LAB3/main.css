@@ -251,16 +251,17 @@ body {
 }
 
 .about-content {
-  display: flex;              /* L (extra) */
-  flex-direction: row;
-  gap: 32px;
+  /* CSS multi-column layout: text flows vertically within each column,
+     overflows into right column when left fills up — matches example p9 */
+  column-count: 2;
+  column-gap: 32px;
 }
 
 .about-content p {
-  flex: 1 1 0;
   font-size: 14px;
   color: var(--text-muted);
   line-height: 1.75;
+  margin-bottom: 12px;
 }
 
 /* =====================================================
@@ -399,17 +400,24 @@ body {
     font-size: 24px;
   }
 
-  /* Movies: 2 per row, third card stays at half-width (no grow) */
+  /* NAVIGATION layout change: center items horizontally (was flex-start on desktop) */
+  .navigation {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  /* MAIN CONTENT layout change: 2 cards per row instead of 3 */
   .movie-card {
     flex: 0 1 calc(50% - 10px);
     min-width: 240px;
     max-width: calc(50% - 10px);
   }
 
-  /* About: stack vertically */
+  /* MAIN CONTENT layout change: about text uses single column (was 2-column) */
   .about-content {
-    flex-direction: column;
-    gap: 16px;
+    column-count: 1;
   }
 }
 
@@ -457,10 +465,9 @@ body {
     flex: 1 1 100%;
   }
 
-  /* About: single column */
+  /* About: single column on mobile */
   .about-content {
-    flex-direction: column;
-    gap: 14px;
+    column-count: 1;
   }
 
   /* Auth form padding */
